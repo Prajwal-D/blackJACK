@@ -52,7 +52,9 @@ int main() {
 	int playerTotal;
 	int dealerTotal;
 	int playerAceFix = 0;
+	int playerAceFixPos = 0;
 	int dealerAceFix = 0;
+	int dealerAceFixPos = 0;
 	bool playerLost = false;
 
 	for (int i = 0; i < 2; i++)
@@ -97,10 +99,11 @@ int main() {
 
 		if (playerCardsCumVal > 21) {
 			if (playerAceFix != playerCards.size() - 1) {
-				for (int i = 0; i < playerCards.size() -1; i++)
+				for (int i = playerAceFixPos; i < playerCards.size() -1; i++)
 				{
 					if (playerCards[i].returnVal() == 1) {
 						playerAceFix += 1;
+						if (i+1 < playerCards.size()) { playerAceFixPos = i + 1; }// malik hopefully since in my for loop i have while i , playerCards.size() -1 it will be fine if it goes over the index of playercards right? right?
 						playerCardsCumVal -= 10;
 						break;
 					}
@@ -177,10 +180,11 @@ int main() {
 		}
 		if (dealerCardsCumVal > 21) {
 			if (dealerAceFix != dealerCards.size() - 1) {
-				for (int i = 0; i < dealerCards.size() - 1; i++)
-				{
+				for (int i = dealerAceFixPos; i < dealerCards.size() - 1; i++)
+				{	
 					if (dealerCards[i].returnVal() == 1) {
 						dealerAceFix += 1;
+						if (i + 1 < dealerCards.size()) { dealerAceFixPos = i + 1; }
 						dealerCardsCumVal -= 10;
 						break;
 					}
